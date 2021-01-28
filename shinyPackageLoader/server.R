@@ -15,6 +15,14 @@ library(DT)
 shinyServer(function(input, output, session) {
 values <- shiny::reactiveValues()
 
+# Return information about the current session / environment and render it for the UI
+{
+    # Current r Version
+    values$rVersion <- R.Version()$version.string
+    output$txRVersion <- shiny::renderText({values$rVersion})
+    
+}
+
 values$iterator <- 1
 
     observeEvent(eventExpr = c(input$packageRefresh,values$iterator),
